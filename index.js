@@ -1,12 +1,12 @@
 const request = require('request-promise');
 const coins = require("./config/coins.json");
 
-
+const uri = "https://api.coinmarketcap.com/v1/ticker/";
 const currentPrices = [];
 const pricePromises = [];
 
 async function requestCoinData(coin){
-    return request(coin.uri)
+    return request(uri + coin.name)
     .then(results => {
         results = JSON.parse(results);
         currentPrices.push({ name: coin.name, price: results[0].price_usd });
@@ -31,7 +31,7 @@ function calculateProfit(currentPrice) {
             coin.changeInValue = parseFloat(changeInValue).toFixed(5);
             coin.originalValue = parseFloat(coin.purchasePrice * coin.volume).toFixed(2);
             coin.currentValue = parseFloat(coin.currentPrice * coin.volume).toFixed(2);
-            coin.profitMade = parseFloat(profitMade - coin.originalValue).toFixed(2);
+            coin.profitMade = parseFloat(coin.currentValue - coin.originalValue).toFixed(2);
         }
     }
 }
