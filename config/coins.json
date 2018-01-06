@@ -28,5 +28,11 @@
         "name": "stellar",
         "purchasePrice": "0.14",
         "volume": "84.04"
+    },
+    {
+        "name": "raiblocks",
+        "purchasePrice": "37.00",
+        "volume": "1.335"
     }
+
 ]

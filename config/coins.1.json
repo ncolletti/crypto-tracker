@@ -1,0 +1,17 @@
+[
+    {
+        "name": "utrust",
+        "purchasePrice": "0.41",
+        "volume": "1103"
+    },
+    {
+        "name": "ethos",
+        "purchasePrice": "2.50",
+        "volume": "181"
+    },
+    {
+        "name": "b3coin",
+        "purchasePrice": "0.00017",
+        "volume": "2500000"
+    }
+]
