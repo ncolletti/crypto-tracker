@@ -1,38 +1,17 @@
 [
     {
-        "name": "utrust",
-        "purchasePrice": "0.06",
-        "volume": "1799"
+        "name": "bitcoin",
+        "purchasePrice": "700.80",
+        "volume": "5"
     },
     {
-        "name": "ethos",
-        "purchasePrice": "2.50",
-        "volume": "25"
+        "name": "ethereum",
+        "purchasePrice": "97.50",
+        "volume": "15"
     },
     {
-        "name": "ethos",
-        "purchasePrice": "0.98",
-        "volume": "122"
-    },
-    {
-        "name": "b3coin",
-        "purchasePrice": "0.00017",
-        "volume": "404000"
-    },
-    {
-        "name": "cardano",
-        "purchasePrice": "0.12",
-        "volume": "99.26"
-    },
-    {
-        "name": "stellar",
-        "purchasePrice": "0.14",
-        "volume": "84.04"
-    },
-    {
-        "name": "raiblocks",
-        "purchasePrice": "37.00",
-        "volume": "1.335"
+        "name": "ripple",
+        "purchasePrice": "0.35",
+        "volume": "1364"
     }
-
 ]

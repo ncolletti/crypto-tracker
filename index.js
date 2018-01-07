@@ -4,12 +4,12 @@ const coins = require('./config/coins.json');
 const uri = 'https://api.coinmarketcap.com/v1/ticker/';
 const currentPrices = [];
 const pricePromises = [];
+const resultsPrint = [];
 const fontColor = {
     down: '33m\u2193 ',
     up: '32m\u2191 '
 }
 
-const resultsPrint =[];
 
 async function requestCoinData(coin){
     return request(uri + coin.name)
@@ -21,27 +21,24 @@ async function requestCoinData(coin){
                 price: results[0].price_usd           
             }
         );
-        resultsPrint.push(results);
+        // resultsPrint.push(results);
 
+        // Set changes in value to coin
         coin.change1hr = results[0].percent_change_1h;
-        coin.change1hrArrow =  results[0].percent_change_1h > 0 ? fontColor.up : fontColor.down;
         coin.change24hr = results[0].percent_change_24h;
-        coin.change24hrArrow =  results[0].percent_change_24h > 0 ? fontColor.up : fontColor.down;
         coin.change7d = results[0].percent_change_7d;
-        coin.change7dArrow = results[0].percent_change_7d > 0 ? fontColor.up : fontColor.down;
 
-        for (let i = 0; i < coins.length; i++) {
-            if (coins[i].name === currentPrice.name) {
-                coins[i].currentPrice = results[0].price_usd;
-            }
-        }
+        // Set the colour and direction for each 3 time periods
+        coin.change24hrArrow =  coin.change1hr > 0 ? fontColor.up : fontColor.down;
+        coin.change1hrArrow =  coin.change24hr > 0 ? fontColor.up : fontColor.down;
+        coin.change7dArrow = coin.change7d > 0 ? fontColor.up : fontColor.down;
     })
     .catch(() => {
          return 'error retrieving data';
     })
 }
 
-function calculateProfit(currentPrice) {
+function calculateChanges(currentPrice) {
     for (let i = 0; i < coins.length; i++) {
         if (coins[i].name === currentPrice.name) {
             let coin = coins[i];
@@ -58,6 +55,7 @@ function calculateProfit(currentPrice) {
 }
 
 
+console.log("Collecting Data...\n");
 for (let i = 0; i < coins.length; i++) {
     pricePromises.push(requestCoinData(coins[i]));
 }
@@ -66,16 +64,17 @@ Promise.all(pricePromises)
     .then(prices => {
         let totalProfit = 0;
         for (let i = 0; i < currentPrices.length; i++) {
-            calculateProfit(currentPrices[i]);
+            calculateChanges(currentPrices[i]);
         }
+        // Print details of each coin to console
         for (let i = 0; i < coins.length; i++) {
             let coin = coins[i];
             console.log(coin.name);
             console.log('original price: $' + coin.purchasePrice);
-            console.log('current price: ' + coin.currentPrice);
-            console.log('change in 1hr: \x1b[' + coin.change1hrArrow + '1hr $' + coin.change1hr + '%\x1b[0m');
-            console.log('change in 24hr: \x1b[' + coin.change24hrArrow + '24hr $' + coin.change24hr + '%\x1b[0m');
-            console.log('change in 7d: \x1b[' + coin.change1hrArrow + '7d $' + coin.change7d + '%\x1b[0m');
+            console.log('current price: $' + coin.currentPrice);
+            console.log('change in 1hr: \x1b[' + coin.change1hrArrow + '1hr ' + coin.change1hr + '%\x1b[0m');
+            console.log('change in 24hr: \x1b[' + coin.change24hrArrow + '24hr ' + coin.change24hr + '%\x1b[0m');
+            console.log('change in 7d: \x1b[' + coin.change7dArrow + '7d ' + coin.change7d + '%\x1b[0m');
             console.log('original value: $' + coin.originalValue);
             console.log('current value: $' + coin.currentValue);
             console.log('Change in price: ' + coin.changeInValue + '%');
