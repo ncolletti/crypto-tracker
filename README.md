@@ -5,6 +5,8 @@ A node.js service that compares your personal coins/tokens and transactions agai
 
 ## Get Started
 
+- Ensure npm v5.6.0+ and node v8.9.3+ are installed
+
 - Create a coins.json file in the config folder or edit the existing file. 
 
 - Fill in the details of your purchases following the template below:
@@ -30,6 +32,8 @@ A node.js service that compares your personal coins/tokens and transactions agai
 ```
 
 > Please note the coin's name must match the name used by coinmarketcap.com, you can find a coin's name at the end of the URL for its page, e.g. [https://coinmarketcap.com/currencies/**bitcoin**/](https://coinmarketcap.com/currencies/bitcoin/)
+
+- Run npm install in your console
 
 - Run `npm start` in your console at the root directory
 
