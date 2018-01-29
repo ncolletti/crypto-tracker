@@ -2,6 +2,9 @@
 
 A node.js service that compares your personal coins/tokens and transactions against data retrieved from the [coinmarketcap.com API](https://coinmarketcap.com/api/)
 
+Created by Github user: kingbonio
+Modified by Github user: ncolletti
+
 
 ## Get Started
 
